@@ -1,0 +1,22 @@
+.mat-card:not([class*=mat-elevation-z]){
+	box-shadow: none;
+}
+.mat-form-field{
+	display: block;
+}
+.mat-card-actions{
+	margin-left: 0 !important;
+	margin-right: 0 !important;
+	margin-bottom: 0 !important;
+}
+.edit-card-savebtn{
+	background-color: #369453;
+	color: #fff;
+}
+.edit-card-closebtn{
+	width: 44px;
+	height: 44px;
+	position: absolute;
+	top: 10px;
+	right: 10px;
+}

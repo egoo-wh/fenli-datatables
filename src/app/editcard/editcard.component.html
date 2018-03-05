@@ -1,0 +1,26 @@
+ <!-- *ngIf="row" -->
+<mat-card>
+  <mat-card-header>
+    <mat-card-title>{{row?"修改":"新建"}}</mat-card-title>
+    <!-- <button mat-icon-button class="edit-card-closebtn" title="关闭" (click)="onClose()"><mat-icon>clear</mat-icon></button> -->
+  </mat-card-header>
+  <mat-form-field>
+  	<mat-label>游戏名称</mat-label>
+  	<!-- don't need two way binding [(ngModel)]="row.name" -->
+    <input #editName matInput [value]="row&&row.name?row.name:''">
+  </mat-form-field>
+  <mat-form-field class="mat-form-field-withhint">
+  	<mat-label>别名</mat-label>
+    <input #editProduct matInput [value]="row&&row.product?row.product:''">
+    <mat-hint>一般为游戏的官网缩写或拼音缩写。可输入多个，英文逗号分隔。</mat-hint>
+  </mat-form-field>
+  <mat-form-field class="mat-form-field-withhint">
+  	<mat-label>分离地址</mat-label>
+    <input #editUrl matInput [value]="row&&row.url?row.url:''">
+    <mat-hint>注意：不需要http(s):部分</mat-hint>
+  </mat-form-field>
+  <mat-card-actions>
+    <button mat-raised-button class="edit-card-savebtn" (click)="onSave()" title="{{row?'修改':'新建'}}">{{row?'修改':'新建'}}</button>
+    <button mat-raised-button (click)="onCancel()" title="取消">取消</button>
+  </mat-card-actions>
+</mat-card>

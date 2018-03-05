@@ -1,0 +1,44 @@
+/* You can add global styles to this file, and also import other style files */
+@import "~@angular/material/prebuilt-themes/indigo-pink.css";
+body{margin: 0;padding: 0;background-color: #f4f7fa;overflow: hidden;}
+@font-face {
+  font-family: 'Material Icons';
+  font-style: normal;
+  font-weight: 400;
+  src: url('assets/materialicons/MaterialIcons-Regular.eot'); /* For IE6-8 */
+  src: 
+  	/*local('Material Icons'),*/
+    /*local('MaterialIcons-Regular'),*/
+    /* @see https://github.com/angular/angular-cli/issues/4778*/
+    url('assets/materialicons/MaterialIcons-Regular.woff2') format('woff2'),
+    url('assets/materialicons/MaterialIcons-Regular.woff') format('woff'),
+    url('assets/materialicons/MaterialIcons-Regular.ttf') format('truetype');
+}
+.material-icons {
+  font-family: 'Material Icons';
+  font-weight: normal;
+  font-style: normal;
+  font-size: 24px;  /* Preferred icon size */
+  display: inline-block;
+  line-height: 1;
+  text-transform: none;
+  letter-spacing: normal;
+  word-wrap: normal;
+  white-space: nowrap;
+  direction: ltr;
+
+  /* Support for all WebKit browsers. */
+  -webkit-font-smoothing: antialiased;
+  /* Support for Safari and Chrome. */
+  text-rendering: optimizeLegibility;
+
+  /* Support for Firefox. */
+  -moz-osx-font-smoothing: grayscale;
+
+  /* Support for IE. */
+  font-feature-settings: 'liga';
+}
+
+mat-form-field.mat-form-field-withhint {padding-bottom: 1.25em;}
+footer{text-align: center;color: #ccc;padding: 10px;font-size: 8px;margin-top: 10px;}
+footer a{color: #ccc;text-decoration: none;}

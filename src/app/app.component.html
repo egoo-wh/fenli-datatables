@@ -1,0 +1,68 @@
+<div class="nav mat-elevation-z2">
+  <div class="nav-start">
+    <a href="//github.com/egoo-wh/egoo" target="_blank" class="logo" title="Egoo CLI">
+      <img src="../assets/img/egoo_cli.svg">
+      <span><em>Egoo CLI</em><i>分离地址管理</i></span>
+    </a>
+  </div>
+  <div class="nav-end">
+    <mat-form-field>
+      <input matInput (keyup)="applyFilter($event.target.value)" placeholder="搜索">
+      <mat-icon matSuffix>search</mat-icon>
+    </mat-form-field>
+    <button mat-raised-button color="primary" class="add-btn" (click)="onAdd()" title="添加"><mat-icon>delete</mat-icon>&nbsp;添加</button>
+    <!-- <button mat-raised-button (click)="onSaveData()" class="save-btn" title="保存"><mat-icon>save</mat-icon>&nbsp;保存</button> -->
+    <a mat-icon-button href="//github.com/egoo-wh/fenli-datatables" class="github-logo">
+      <img src="../assets/img/github-circle-black-transparent.svg">
+    </a>
+  </div>
+</div>
+
+<div [(ngClass)]="currentClasses">
+  <div class="table-loading" *ngIf="isLoadingResults">
+    <mat-spinner mode="indeterminate" [diameter]="50"></mat-spinner>
+  </div>
+  <div [(ngClass)]="tableCtClasses">
+    <mat-table [dataSource]="dataSource" matSort>
+
+      <!-- Name Column -->
+      <ng-container matColumnDef="name">
+        <mat-header-cell *matHeaderCellDef mat-sort-header> 游戏名称 </mat-header-cell>
+        <mat-cell *matCellDef="let row"> {{row.name}} </mat-cell>
+      </ng-container>
+
+      <!-- Product Column -->
+      <ng-container matColumnDef="product">
+        <mat-header-cell *matHeaderCellDef mat-sort-header> <span matTooltip="一般为游戏的官网缩写或拼音缩写">别名</span>  </mat-header-cell>
+        <mat-cell *matCellDef="let row"> {{row.product}} </mat-cell>
+      </ng-container>
+
+      <!-- Url Column -->
+      <ng-container matColumnDef="url">
+        <mat-header-cell *matHeaderCellDef mat-sort-header> 图片分离地址 </mat-header-cell>
+        <mat-cell *matCellDef="let row"> {{row.url}} </mat-cell>
+      </ng-container>
+
+      <!-- Delete Button Column -->
+      <ng-container matColumnDef="buttons">
+          <mat-header-cell *matHeaderCellDef> 操作 </mat-header-cell>
+          <mat-cell *matCellDef="let row" (click)="$event.stopPropagation()">
+              <button mat-icon-button (click)="onDelete(row)" title="删除">
+                  <mat-icon>delete</mat-icon>
+              </button>
+          </mat-cell>
+      </ng-container>
+
+      <mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>
+      <mat-row *matRowDef="let row; columns: displayedColumns;" 
+                [ngClass]="{'mat-selected': selection.isSelected(row)}"
+                (click)="onEdit(row)">
+      </mat-row>
+    </mat-table>
+
+    <mat-paginator [hidePageSize]="true" [pageSize]="10" [pageSizeOptions]="[5, 10, 25, 100]"></mat-paginator>
+  </div>
+
+  <app-editcard class="edit-card" [row]="selectedRow" (createEvt)="onCreateRow($event)" (closeEvt)="onCloseEdit()" (editEvt)="onEditRow($event)" ></app-editcard>
+</div>
+<footer>COPYRIGHTS &copy; 2010 - 2018 <a href="//egooidea.com" target="_blank">egooidea.com</a> </footer>
