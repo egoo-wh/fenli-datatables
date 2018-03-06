@@ -40,5 +40,5 @@ body{margin: 0;padding: 0;background-color: #f4f7fa;overflow: hidden;}
 }
 
 mat-form-field.mat-form-field-withhint {padding-bottom: 1.25em;}
-footer{text-align: center;color: #ccc;padding: 10px;font-size: 8px;margin-top: 10px;}
+footer{text-align: center;color: #ccc;padding: 10px;font-size: 12px;margin-top: 10px;}
 footer a{color: #ccc;text-decoration: none;}
