@@ -7,8 +7,7 @@ import { catchError, retry } from 'rxjs/operators';
 
 
 import { FenliAddr } from './FenliAddr';
-
-const SERVER_URL = 'http://localhost:3333/';
+import { environment } from '../environments/environment';
 
 const httpOptions = {
   headers: new HttpHeaders({
@@ -24,28 +23,31 @@ export class AppService {
   	private http: HttpClient) { }
 
 	list() {
-	  return this.http.get<FenliAddr[]>(SERVER_URL+'list');
+	  return this.http.get<FenliAddr[]>(this.getServerUrl()+'list');
 	}
 
   /** POST: add a new FenliAddr to the database */
   add (fa: FenliAddr): Observable<any> {
-    return this.http.post<FenliAddr>(SERVER_URL+'new', fa, httpOptions)
+    return this.http.post<FenliAddr>(this.getServerUrl()+'new', fa, httpOptions)
       .pipe(
         catchError(this.handleError('add'))
       );
   }
 
   delete(fa: FenliAddr) {
-  	return this.http.delete(SERVER_URL+'delete/'+fa._id, httpOptions);
+  	return this.http.delete(this.getServerUrl()+'delete/'+fa._id, httpOptions);
   }
 
   edit(fa: FenliAddr): Observable<any> {
-  	return this.http.post<FenliAddr>(SERVER_URL+'edit', fa, httpOptions)
+  	return this.http.post<FenliAddr>(this.getServerUrl()+'edit', fa, httpOptions)
   		.pipe(
   			catchError(this.handleError('edit'))
   		);
   }
 
+  private getServerUrl() {
+  	return window.location.protocol+'//'+environment.apiUrl;
+  }
   /**
 	 * Handle Http operation that failed.
 	 * Let the app continue.
@@ -59,16 +61,10 @@ export class AppService {
 	    console.error(error); // log to console instead
 
 	    // TODO: better job of transforming error for user consumption
-	    this.log(`${operation} failed: ${error.message}`);
+	    console.log(`${operation} failed: ${error.message}`);
 
 	    // Let the app keep running by returning an empty result.
 	    return of(result as T);
 	  };
-	}
-
-	/** Log a HeroService message with the MessageService */
-	private log(message: string) {
-	  // this.messageService.add('HeroService: ' + message);
-	  console.log(message);
 	}
 }

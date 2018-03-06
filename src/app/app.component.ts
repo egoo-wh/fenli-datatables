@@ -58,8 +58,8 @@ export class AppComponent implements OnInit{
   }
 
   ngAfterViewInit() {
-    console.log(this.paginator);
-    console.log(this.sort);
+    // console.log(this.paginator);
+    // console.log(this.sort);
     this.dataSource.paginator = this.paginator;
     this.dataSource.sort = this.sort;
   }
@@ -74,7 +74,7 @@ export class AppComponent implements OnInit{
     this.appService.list()
       .subscribe(data => {
         this.rawData = this.handleResponseData(data);
-        console.log(this.rawData);
+        // console.log(this.rawData);
         if (this.rawData) {
            this.isLoadingResults = false;
           this.dataSource.data = this.rawData;
@@ -101,9 +101,9 @@ export class AppComponent implements OnInit{
 
   onCreateRow(e){
     this.appService.add(e).subscribe(data=>{
-      console.log(data);
+      // console.log(data);
       let _data = this.handleResponseData(data);
-      this.rawData.unshift(_data);
+      this.rawData.push(_data);
       this.dataSource.data = this.rawData;
     })
     
@@ -112,7 +112,7 @@ export class AppComponent implements OnInit{
   onEditRow(e){
     if (!isEqual(this.comparedRow, e)) {
       this.appService.edit(e).subscribe(data=>{
-        console.log(data);
+        // console.log(data);
         let _data = this.handleResponseData(data);
         e = data;
         this.dataSource.data = this.rawData;
@@ -137,10 +137,10 @@ export class AppComponent implements OnInit{
     const dialogRef = this.dialog.open(DeleteAlertDialog);
 
     dialogRef.afterClosed().subscribe(result => {
-      console.log(result);
+      // console.log(result);
       if (result) {
         this.appService.delete(row).subscribe(data=>{
-          console.log(data);
+          // console.log(data);
           // remove data
           this.rawData.splice(this.rawData.indexOf(row), 1);
           this.dataSource.data = this.rawData;
@@ -160,7 +160,6 @@ export class AppComponent implements OnInit{
 
   showReqError(err) {
     console.error(err);
-    console.log(this);
     // show snackbar
     this.snackBar.open("网络出错，请稍后重试。", null, {
       duration: 2000,
